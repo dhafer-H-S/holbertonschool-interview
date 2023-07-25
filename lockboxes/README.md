@@ -1,0 +1,1 @@
+this file is for holberton school interview exercise and it for more practise and for this task is lockboxes that need to travel throught every box and check if it's open or not and if it's open check if the keys in it can open other boxes or not
