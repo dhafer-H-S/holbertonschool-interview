@@ -5,7 +5,7 @@ if not sherache for the keys if existed and open them"""
 
 def canUnlockAll(boxes):
     n = len(boxes)
-    opened = [False]*n
+    opened = [False] * n
     opened[0] = True
 
     for _ in range(n):
