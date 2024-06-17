@@ -1,5 +1,16 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
 def minOperations(n):
+    """
+    Calculates the minimum number of operations required to reach given number
+
+    Args:
+        n (int): The target number.
+
+    Returns:
+        int: The minimum number of operations required.
+
+    """
     if n < 1:
         return 0
     operation = 0
