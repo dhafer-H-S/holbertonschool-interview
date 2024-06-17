@@ -1,23 +1,23 @@
 #!/usr/bin/python3
 
+import math
+
 def minOperations(n):
-    """
-    Calculates the minimum number of operations required to reach given number
-
-    Args:
-        n (int): The target number.
-
-    Returns:
-        int: The minimum number of operations required.
-
-    """
-    if n < 1:
+    if n < 2:
         return 0
-    operation = 0
-    division = 2
-    while n > 1:
-        while n % division == 0:
-            operation += division
-            n //= division
-        division += 1
-    return operation
+    
+    operations = 0
+    factor = 2
+    
+    # Check for smallest factors first
+    while factor * factor <= n:
+        while n % factor == 0:
+            operations += factor
+            n //= factor
+        factor += 1
+    
+    # If n is still greater than 1, then it's prime
+    if n > 1:
+        operations += n
+    
+    return operations
