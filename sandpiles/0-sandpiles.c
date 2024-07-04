@@ -6,9 +6,10 @@ bool is_stable(int grid[3][3]);
 void stabilize(int grid[3][3]);
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
+    int i, j;
     /* Step 1: Add the two sandpiles */
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             grid1[i][j] += grid2[i][j];
         }
     }
@@ -21,8 +22,9 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
 }
 
 bool is_stable(int grid[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
                 return false;
             }
@@ -31,10 +33,12 @@ bool is_stable(int grid[3][3]) {
     return true;
 }
 
+
 void print_grid(int grid[3][3]) {
+    int i, j;
     printf("=\n");
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (j) printf(" ");
             printf("%d", grid[i][j]);
         }
@@ -43,7 +47,8 @@ void print_grid(int grid[3][3]) {
 }
 
 void stabilize(int grid[3][3]) {
-    int temp[3][3] = {0};
+    int i, j; 
+    int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
