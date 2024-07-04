@@ -61,12 +61,12 @@ bool is_stable(int grid[3][3])
 		{
 			if (grid[i][j] > 3)
 			{
-				return false;
+				return (false);
 			}
 		}
 	}
 
-	return true;
+	return (true);
 }
 
 /**
