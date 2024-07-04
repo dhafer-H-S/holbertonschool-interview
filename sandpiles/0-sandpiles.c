@@ -6,14 +6,14 @@ bool is_stable(int grid[3][3]);
 void stabilize(int grid[3][3]);
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
-    // Step 1: Add the two sandpiles
+    /* Step 1: Add the two sandpiles */
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             grid1[i][j] += grid2[i][j];
         }
     }
 
-    // Step 2 & 3: Check stability, print and stabilize if needed
+    /* Step 2 & 3: Check stability, print and stabilize if needed */
     while (!is_stable(grid1)) {
         print_grid(grid1);
         stabilize(grid1);
@@ -48,14 +48,18 @@ void stabilize(int grid[3][3]) {
         for (int j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
                 temp[i][j] -= 4;
-                if (i > 0) temp[i-1][j] += 1; // Top
-                if (i < 2) temp[i+1][j] += 1; // Bottom
-                if (j > 0) temp[i][j-1] += 1; // Left
-                if (j < 2) temp[i][j+1] += 1; // Right
+                /* Top */
+                if (i > 0) temp[i-1][j] += 1;
+                /* Bottom */
+                if (i < 2) temp[i+1][j] += 1;
+                /* Left */
+                if (j > 0) temp[i][j-1] += 1;
+                /* Right */
+                if (j < 2) temp[i][j+1] += 1;
             }
         }
     }
-    // Apply the toppling to the original grid
+    /* Apply the toppling to the original grid */
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             grid[i][j] += temp[i][j];
