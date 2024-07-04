@@ -33,7 +33,6 @@ bool is_stable(int grid[3][3]) {
     return true;
 }
 
-
 void print_grid(int grid[3][3]) {
     int i, j;
     printf("=\n");
@@ -47,7 +46,6 @@ void print_grid(int grid[3][3]) {
 }
 
 void stabilize(int grid[3][3]) {
-    int i, j; 
     int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
