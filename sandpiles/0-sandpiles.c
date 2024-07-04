@@ -47,8 +47,10 @@ void print_grid(int grid[3][3]) {
 
 void stabilize(int grid[3][3]) {
     int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    int i, j;
+
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
                 temp[i][j] -= 4;
                 /* Top */
@@ -63,8 +65,8 @@ void stabilize(int grid[3][3]) {
         }
     }
     /* Apply the toppling to the original grid */
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             grid[i][j] += temp[i][j];
         }
     }
