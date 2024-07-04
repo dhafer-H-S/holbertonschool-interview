@@ -81,7 +81,8 @@ void print_grid(int grid[3][3])
  * stabilize - Stabilizes a sandpile
  * @grid: Sandpile to stabilize
  */
-void stabilize(int grid[3][3]) {
+void stabilize(int grid[3][3])
+{
     int temp[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
     int i, j;
 
@@ -89,18 +90,14 @@ void stabilize(int grid[3][3]) {
         for (j = 0; j < 3; j++) {
             if (grid[i][j] > 3) {
                 temp[i][j] -= 4;
-                /* Top */
                 if (i > 0) temp[i-1][j] += 1;
-                /* Bottom */
                 if (i < 2) temp[i+1][j] += 1;
-                /* Left */
                 if (j > 0) temp[i][j-1] += 1;
-                /* Right */
                 if (j < 2) temp[i][j+1] += 1;
             }
         }
     }
-    /* Apply the toppling to the original grid */
+
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             grid[i][j] += temp[i][j];
