@@ -99,7 +99,7 @@ void stabilize(int grid[3][3])
         for (j = 0; j < 3; j++)
         {
             if (grid[i][j] > 3)
-        {
+            {
                 temp[i][j] -= 4;
                 if (i > 0) temp[i-1][j] += 1;
                 if (i < 2) temp[i+1][j] += 1;
