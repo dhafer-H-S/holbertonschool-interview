@@ -8,9 +8,9 @@ listint_t *reverse_list(listint_t *head) {
     listint_t *next = NULL;
 
     while (current != NULL) {
-        next = current->next; // Save next
-        current->next = prev; // Reverse current node's pointer
-        prev = current; // Move pointers one position ahead
+        next = current->next;
+        current->next = prev;
+        prev = current;
         current = next;
     }
     head = prev;
