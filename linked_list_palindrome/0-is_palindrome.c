@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "lists.h" // Include the header file for list definitions and prototypes
+#include "lists.h"
 
 /* Function prototype for reversing the list */
 listint_t *reverse_list(listint_t *head) {
