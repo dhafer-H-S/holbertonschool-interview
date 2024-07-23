@@ -17,6 +17,9 @@ line_count = 0
 
 
 def print_stats():
+    """
+    Print the total file size and the count of each status code.
+    """
     print(f"total file size: {total_file_size}")
     for code in sorted(status_code_counts.keys()):
         if status_code_counts[code] > 0:
@@ -24,6 +27,9 @@ def print_stats():
 
 
 def signal_handler(sig, frame):
+    """
+    Signal handler function that prints the statistics and exits the program.
+    """
     print_stats()
     sys.exit(0)
 
