@@ -1,19 +1,36 @@
 #!/usr/bin/python3
+"""
+This module is designed to parse log data from a standard input stream,
+keeping track of the total file size and the count of HTTP status codes
+encountered. It provides functionality to print these statistics to the
+standard output, offering insights into the nature of the traffic or log
+data being analyzed.
+
+Features:
+- Tracks total file size of log entries.
+- Counts occurrences of specific HTTP status codes.
+- Prints accumulated statistics to standard output.
+
+Usage:
+This script is intended to be used in a pipeline where it receives log data
+from a standard input stream. It can be used in conjunction with a log generator
+script or a file containing log data. The script continuously reads from standard
+input until interrupted, at which point it prints the final statistics
+to standard output.
+
+Example:
+`./log_generator.py | ./0-stats.py`
+Where `log_generator.py` is a script that outputs log data to standard output.
+
+Dependencies:
+- sys: For reading from standard input and handling interruptions.
+- signal: For setting up signal handling to gracefully exit print statistics
+upon receiving an interrupt signal.
+"""
+
 import sys
 import signal
-"""
-This module demonstrates the use of the `sys` and `signal`
-standard library modules in Python.
 
-- `sys`: This module provides access to some variables used or
-maintained by the Python interpreter and to functions that interact strongly
-with the interpreter. It is used to manipulate Python runtime environment.
-
-- `signal`: This module provides mechanisms to use signal handlers in Python.
-Signal handlers are used to take action in response to signals received by the
-program from the operating system. This is useful for handling program
-interruptions or cleanup actions.
-"""
 
 
 total_file_size = 0
