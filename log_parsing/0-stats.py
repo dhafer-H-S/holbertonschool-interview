@@ -1,4 +1,17 @@
 #!/usr/bin/python3
+"""
+This module demonstrates the use of the `sys` and `signal`
+standard library modules in Python.
+
+- `sys`: This module provides access to some variables used or
+maintained by the Python interpreter and to functions that interact strongly
+with the interpreter. It is used to manipulate Python runtime environment.
+
+- `signal`: This module provides mechanisms to use signal handlers in Python.
+Signal handlers are used to take action in response to signals received by the
+program from the operating system. This is useful for handling program
+interruptions or cleanup actions.
+"""
 import sys
 import signal
 
@@ -39,6 +52,10 @@ def print_stats():
 def signal_handler(sig, frame):
     """
     Signal handler function that prints the statistics and exits the program.
+
+    This function is called when a SIGINT signal is received. It prints the
+    statistics using the `print_stats()` function and exits the program with
+    a status code of 0.
     """
     print_stats()
     sys.exit(0)
