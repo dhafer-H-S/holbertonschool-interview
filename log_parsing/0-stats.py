@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+import sys
+import signal
 """
 This module demonstrates the use of the `sys` and `signal`
 standard library modules in Python.
@@ -12,8 +14,6 @@ Signal handlers are used to take action in response to signals received by the
 program from the operating system. This is useful for handling program
 interruptions or cleanup actions.
 """
-import sys
-import signal
 
 
 total_file_size = 0
