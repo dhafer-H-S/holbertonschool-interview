@@ -19,6 +19,16 @@ line_count = 0
 def print_stats():
     """
     Print the total file size and the count of each status code.
+
+    This function prints the total file size and the count of each status code
+    in the `status_code_counts` dictionary. The total file size is obtained
+    from the `total_file_size` variable.
+
+    Example output:
+    total file size: 1024
+    200: 10
+    404: 5
+    500: 2
     """
     print(f"total file size: {total_file_size}")
     for code in sorted(status_code_counts.keys()):
