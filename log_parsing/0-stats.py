@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+import sys
+import signal
 """
 This module is designed to parse log data from a standard input stream,
 keeping track of the total file size and the count of HTTP status codes
@@ -27,10 +29,6 @@ Dependencies:
 - signal: For setting up signal handling to gracefully exit print statistics
 upon receiving an interrupt signal.
 """
-
-import sys
-import signal
-
 
 
 total_file_size = 0
