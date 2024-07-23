@@ -2,28 +2,6 @@
 import sys
 import signal
 """
-This module is designed to parse log data from a standard input stream,
-keeping track of the total file size and the count of HTTP status codes
-encountered. It provides functionality to print these statistics to the
-standard output, offering insights into the nature of the traffic or log
-data being analyzed.
-
-Features:
-- Tracks total file size of log entries.
-- Counts occurrences of specific HTTP status codes.
-- Prints accumulated statistics to standard output.
-
-Usage:
-This script is intended to be used in a pipeline where it receives log data
-from a standard input stream. It can be used in conjunction with a log generator
-script or a file containing log data. The script continuously reads from standard
-input until interrupted, at which point it prints the final statistics
-to standard output.
-
-Example:
-`./log_generator.py | ./0-stats.py`
-Where `log_generator.py` is a script that outputs log data to standard output.
-
 Dependencies:
 - sys: For reading from standard input and handling interruptions.
 - signal: For setting up signal handling to gracefully exit print statistics
