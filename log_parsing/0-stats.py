@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-module sys for reading standrad input and handling interruptions
-for setting up signal handling to gracefully exit and print
-"""
+"""Log parsing"""
 import sys
 import signal
 
