@@ -2,8 +2,17 @@
 
 
 def validUTF8(data):
+    """Check if the given data represents a valid UTF-8 encoding.
+
+    Args:
+        data (list[int]): A list of integers representing the bytes of the data.
+
+    Returns:
+        bool: True if the data is a valid UTF-8 encoding, False otherwise.
+    """
+
     def is_valid_byte(byte, mask, expected):
-        """ Helper function to validate a byte against mask and expected pattern """
+        """Helper function to validate a byte against mask and expected pattern."""
         return (byte & mask) == expected
 
     i = 0
