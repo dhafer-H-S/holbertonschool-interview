@@ -1,12 +1,11 @@
 #!/usr/bin/python3
+"""
+module sys for reading standrad input and handling interruptions
+for setting up signal handling to gracefully exit and print
+"""
 import sys
 import signal
-"""
-Dependencies:
-- sys: For reading from standard input and handling interruptions.
-- signal: For setting up signal handling to gracefully exit print statistics
-upon receiving an interrupt signal.
-"""
+
 
 
 total_file_size = 0
