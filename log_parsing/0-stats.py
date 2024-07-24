@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Log parsing"""
+
+
 import sys
 import signal
-
-
 
 total_file_size = 0
 status_code_counts = {
