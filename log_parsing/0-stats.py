@@ -1,77 +1,62 @@
 #!/usr/bin/python3
 """Log parsing"""
-
-
+import datetime
 import sys
-import signal
 
-total_file_size = 0
-status_code_counts = {
-    200: 0,
-    301: 0,
-    400: 0,
-    401: 0,
-    403: 0,
-    404: 0,
-    405: 0,
-    500: 0}
-line_count = 0
+status = [200, 301, 400, 401, 403, 404, 405, 500]
+status_count = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 
 
-def print_stats():
-    """
-    Print the total file size and the count of each status code.
-
-    This function prints the total file size and the count of each status code
-    in the `status_code_counts` dictionary. The total file size is obtained
-    from the `total_file_size` variable.
-
-    Example output:
-    total file size: 1024
-    200: 10
-    404: 5
-    500: 2
-    """
-    print(f"total file size: {total_file_size}")
-    for code in sorted(status_code_counts.keys()):
-        if status_code_counts[code] > 0:
-            print(f"{code}: {status_code_counts[code]}")
-
-
-def signal_handler(sig, frame):
-    """
-    Signal handler function that prints the statistics and exits the program.
-
-    This function is called when a SIGINT signal is received. It prints the
-    statistics using the `print_stats()` function and exits the program with
-    a status code of 0.
-    """
-    print_stats()
-    sys.exit(0)
-
-
-signal.signal(signal.SIGINT, signal_handler)
-
-for line in sys.stdin:
+def parse(line):
+    """Parse a line"""
+    data = line.rstrip().split()
     try:
-        parts = line.split()
-        if len(parts) < 9:
-            continue
-
-        status_code = int(status_code)
-        file_size = int(file_size)
-
-        if status_code not in status_code_counts:
-            continue
-
-        total_file_size += file_size
-        status_code_counts[status_code] += 1
-
-        line_count += 1
-        if line_count % 10 == 0:
-            print_stats()
-
+        status_code = int(data[-2])
+        file_size = int(data[-1])
+        if status_code not in status:
+            return None
+        return {"status_code": status_code, "file_size": file_size}
     except Exception:
-        continue
+        pass
 
-print_stats()
+
+def parse10(data_list):
+    """parse 10 lines of generated logs"""
+    file_size = 0
+    try:
+        for data in data_list:
+            file_size += data["file_size"]
+            status_count[data["status_code"]] += 1
+        return file_size, status_count
+    except Exception:
+        pass
+
+
+def print_stats(file_size, status_count):
+    """print stats"""
+    print("File size: {}".format(file_size))
+    for k, v in sorted(status_count.items()):
+        if v != 0:
+            print("{}: {}".format(k, v))
+
+
+if __name__ == "__main__":
+    data_list = []
+    h = 0
+    try:
+        for input_line in sys.stdin:
+            if input_line == "":
+                print("file size: 0")
+            data_list.append(parse(input_line))
+            if len(data_list) == 10:
+                file_size, status_count = parse10(data_list)
+                h = file_size
+                print_stats(file_size, status_count)
+                data_list = []
+        # emptying the buffer
+        x, y = parse10(data_list)
+        x += h
+        print_stats(x, y)
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt")
+        exit(0)
