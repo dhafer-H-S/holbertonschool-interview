@@ -2,18 +2,16 @@
 """Log parsing"""
 import sys
 
-
 def print_stats(total_size, status_codes):
-    """ Print statistics about the size of the log file"""
+    """Print statistics about the size of the log file"""
     print("File size: {}".format(total_size))
     for code in sorted(status_codes):
         count = status_codes[code]
         if count > 0:
             print("{}: {}".format(code, count))
 
-
 def main():
-    """ Main program """
+    """Main program"""
     total_size = 0
     status_codes = {200: 0, 301: 0, 400: 0,
                     401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
@@ -41,7 +39,6 @@ def main():
         pass
 
     print_stats(total_size, status_codes)
-
 
 if __name__ == "__main__":
     main()
