@@ -1,49 +1,67 @@
 #!/usr/bin/python3
 
-
 def validUTF8(data):
-    """Check if the given data represents a valid UTF-8 encoding.
+    """
+    Determine if a given list of integers represents a valid UTF-8 encoding.
 
-    Args:
-        data (list[int]): A list of integers representing the bytes of the data.
+    UTF-8 is a variable-length character encoding for Unicode. Characters can
+    be represented by 1 to 4 bytes in UTF-8 encoding. This function validates
+    if the provided list of integers conforms to the UTF-8 encoding rules.
+
+    Parameters:
+    data (list of int): A list of integers where each integer represents 1 byte
+                        of data (0 to 255).
 
     Returns:
-        bool: True if the data is a valid UTF-8 encoding, False otherwise.
+    bool: True if the data is a valid UTF-8 encoding, otherwise False.
     """
+    
+    def is_continuation_byte(byte):
+        """
+        Check if a byte is a continuation byte in UTF-8 encoding.
 
-    def is_valid_byte(byte, mask, expected):
-        """Helper function to validate a byte against mask and expected pattern."""
-        return (byte & mask) == expected
+        Continuation bytes in UTF-8 start with '10' in binary (0x80 to 0xBF in hexadecimal).
 
-    i = 0
-    while i < len(data):
-        byte = data[i]
-        if byte > 255:
-            # Integer out of byte range
-            return False
-        elif byte & 0b10000000 == 0:
+        Parameters:
+        byte (int): A single byte represented as an integer (0 to 255).
+
+        Returns:
+        bool: True if the byte is a continuation byte, otherwise False.
+        """
+        return (byte & 0xC0) == 0x80
+
+    num_bytes = 0  # Number of bytes expected in the current sequence
+
+    for byte in data:
+        if (byte & 0x80) == 0:
             # 1-byte character (0xxxxxxx)
-            i += 1
-        elif is_valid_byte(byte, 0b11100000, 0b11000000):
+            if num_bytes > 0:
+                return False
+            num_bytes = 0
+        elif (byte & 0xE0) == 0xC0:
             # 2-byte character (110xxxxx 10xxxxxx)
-            if i + 1 >= len(data) or not is_valid_byte(data[i + 1], 0b11000000, 0b10000000):
+            if num_bytes > 0:
                 return False
-            i += 2
-        elif is_valid_byte(byte, 0b11110000, 0b11100000):
+            num_bytes = 1
+        elif (byte & 0xF0) == 0xE0:
             # 3-byte character (1110xxxx 10xxxxxx 10xxxxxx)
-            if (i + 2 >= len(data) or
-                not is_valid_byte(data[i + 1], 0b11000000, 0b10000000) or
-                not is_valid_byte(data[i + 2], 0b11000000, 0b10000000)):
+            if num_bytes > 0:
                 return False
-            i += 3
-        elif is_valid_byte(byte, 0b11111000, 0b11110000):
+            num_bytes = 2
+        elif (byte & 0xF8) == 0xF0:
             # 4-byte character (11110xxx 10xxxxxx 10xxxxxx 10xxxxxx)
-            if (i + 3 >= len(data) or
-                not is_valid_byte(data[i + 1], 0b11000000, 0b10000000) or
-                not is_valid_byte(data[i + 2], 0b11000000, 0b10000000) or
-                not is_valid_byte(data[i + 3], 0b11000000, 0b10000000)):
+            if num_bytes > 0:
                 return False
-            i += 4
+            num_bytes = 3
         else:
+            # Invalid byte
             return False
-    return True
+
+        # Check for continuation bytes if needed
+        if num_bytes > 0:
+            if not is_continuation_byte(byte):
+                return False
+            num_bytes -= 1
+
+    # All bytes must be part of valid sequences
+    return num_bytes == 0
