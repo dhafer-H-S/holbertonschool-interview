@@ -17,7 +17,6 @@ def validUTF8(data):
     Returns:
     bool: True if the data is a valid UTF-8 encoding, otherwise False.
     """
-    
     def is_continuation_byte(byte):
         """
         Check if a byte is a continuation byte in UTF-8 encoding.
@@ -33,7 +32,7 @@ def validUTF8(data):
         """
         return (byte & 0xC0) == 0x80
 
-    num_bytes = 0  
+    num_bytes = 0
 
     for byte in data:
         if num_bytes == 0:
