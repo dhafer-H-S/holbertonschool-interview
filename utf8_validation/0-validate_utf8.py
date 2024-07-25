@@ -30,38 +30,31 @@ def validUTF8(data):
         """
         return (byte & 0xC0) == 0x80
 
-    num_bytes = 0  # Number of bytes expected in the current sequence
+    num_bytes = 0  
 
     for byte in data:
         if (byte & 0x80) == 0:
-            # 1-byte character (0xxxxxxx)
             if num_bytes > 0:
                 return False
             num_bytes = 0
         elif (byte & 0xE0) == 0xC0:
-            # 2-byte character (110xxxxx 10xxxxxx)
             if num_bytes > 0:
                 return False
             num_bytes = 1
         elif (byte & 0xF0) == 0xE0:
-            # 3-byte character (1110xxxx 10xxxxxx 10xxxxxx)
             if num_bytes > 0:
                 return False
             num_bytes = 2
         elif (byte & 0xF8) == 0xF0:
-            # 4-byte character (11110xxx 10xxxxxx 10xxxxxx 10xxxxxx)
             if num_bytes > 0:
                 return False
             num_bytes = 3
         else:
-            # Invalid byte
             return False
 
-        # Check for continuation bytes if needed
         if num_bytes > 0:
             if not is_continuation_byte(byte):
                 return False
             num_bytes -= 1
 
-    # All bytes must be part of valid sequences
     return num_bytes == 0
