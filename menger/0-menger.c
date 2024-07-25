@@ -3,7 +3,8 @@
 #include "menger.h"
 
 /**
- * is_menger - Determines if a cell at (x, y) should be filled in a Menger sponge
+ * is_menger - Determines if a cell at (x, y)
+ * should be filled in a Menger sponge
  * @x: The x coordinate of the cell
  * @y: The y coordinate of the cell
  *
