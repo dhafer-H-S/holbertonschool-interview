@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """utf8"""
 
+
 def validUTF8(data):
     """
     Determine if a given list of integers represents a valid UTF-8 encoding.
